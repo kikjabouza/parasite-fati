@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Parasitologie - Examen</title>
+    <title>Tableau Récapitulatif - Parasitologie</title>
     <style>
         * {
             margin: 0;
@@ -14,1231 +14,1841 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
         }
         
         .header {
-            background: white;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
             padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             text-align: center;
         }
         
         .header h1 {
-            color: #667eea;
+            font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .header p {
-            color: #666;
+            font-size: 1.1em;
+            opacity: 0.9;
         }
         
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            background: white;
-            padding: 15px;
+        .content {
+            padding: 30px;
+        }
+        
+        .parasite-section {
+            margin-bottom: 40px;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .tab-btn {
-            padding: 10px 20px;
-            border: 2px solid #ddd;
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            color: #333;
-        }
-        
-        .tab-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-        }
-        
-        .tab-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .parasite-card {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .card-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .parasite-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .parasite-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
             padding: 20px;
-            font-size: 24px;
+            font-size: 1.8em;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
-        .card-body {
-            padding: 20px;
+        .protozoaire .parasite-header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
         }
         
-        .section {
-            margin-bottom: 20px;
+        .helminthe .parasite-header {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
         }
         
-        .section-title {
-            color: #667eea;
-            font-size: 18px;
-            font-weight: bold;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+        .icon {
+            font-size: 1.2em;
         }
         
-        .info-item {
-            margin-bottom: 12px;
-            padding-left: 15px;
-            border-left: 4px solid #764ba2;
-        }
-        
-        .info-label {
-            font-weight: bold;
-            color: #333;
-            display: inline;
-        }
-        
-        .info-value {
-            color: #555;
-            display: inline;
-        }
-        
-        .table-responsive {
-            overflow-x: auto;
-            margin-bottom: 15px;
+        .parasite-content {
+            padding: 0;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px 0;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
         }
         
         th {
-            background: #f0f0f0;
-            font-weight: bold;
-            color: #667eea;
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 3px solid #2c3e50;
+            width: 20%;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            vertical-align: top;
         }
         
         tr:hover {
-            background: #f9f9f9;
+            background: #f8f9fa;
+        }
+        
+        .label {
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+            min-width: 150px;
+        }
+        
+        .important {
+            background: #fff3cd;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        .danger {
+            background: #f8d7da;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #721c24;
+        }
+        
+        .success {
+            background: #d4edda;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #155724;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        li {
+            margin-bottom: 5px;
         }
         
         .note {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-style: italic;
         }
         
-        .note-title {
+        .category-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
             font-weight: bold;
-            color: #856404;
-            margin-bottom: 5px;
+            margin-left: 10px;
         }
         
-        .note-content {
-            color: #856404;
-            font-size: 14px;
+        .proto-badge {
+            background: #ffebee;
+            color: #c62828;
         }
         
-        .warning {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 5px;
+        .helm-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
         }
-        
-        .warning-title {
-            font-weight: bold;
-            color: #721c24;
-            margin-bottom: 5px;
-        }
-        
-        .warning-content {
-            color: #721c24;
-            font-size: 14px;
-        }
-        
-        .list-item {
-            margin: 8px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-        
-        .list-item:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .parasite-section {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>📚 Guide Complet de Parasitologie</h1>
-            <p>Tableau récapitulatif pour votre préparation à l'examen</p>
+            <h1>🦠 TABLEAU RÉCAPITULATIF - PARASITOLOGIE</h1>
+            <p>Guide complet pour la préparation à l'examen</p>
         </div>
         
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('entamoeba')">Entamoeba histolytica</button>
-            <button class="tab-btn" onclick="showTab('ascaris')">Ascaris lumbricoides</button>
-            <button class="tab-btn" onclick="showTab('oxyure')">Oxyure</button>
-            <button class="tab-btn" onclick="showTab('ankylostome')">Ankylostome</button>
-            <button class="tab-btn" onclick="showTab('taenia')">Taenia</button>
-            <button class="tab-btn" onclick="showTab('douve')">Douve</button>
-            <button class="tab-btn" onclick="showTab('giardia')">Giardia intestinalis</button>
-        </div>
-        
-        <!-- ENTAMOEBA HISTOLYTICA -->
-        <div id="entamoeba" class="tab-content active">
-            <div class="parasite-card">
-                <div class="card-header">🔬 Entamoeba histolytica (Amibiase)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasite :</span>
-                            <span class="info-value">Protozoaire unicellulaire</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Classification :</span>
-                            <span class="info-value">Rhizopode, Famille des Entamoebidae</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, monoxène, obligatoire</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔄 FORMES PARASITAIRES</div>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Forme</th>
-                                        <th>Taille</th>
-                                        <th>Caractéristiques</th>
-                                        <th>Rôle</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Forme Minuta</strong></td>
-                                        <td>12-15 μm</td>
-                                        <td>Mobile, monoloculaire, pseudopode hyalin, non hématophage</td>
-                                        <td>Agent infestant (non pathogène)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Forme Histolytica</strong></td>
-                                        <td>20-30 μm</td>
-                                        <td>Hématophage, vacuoles digestives contenant érythrocytes, noyau visible</td>
-                                        <td>Agent pathogène (invasive)</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Kyste</strong></td>
-                                        <td>12-14 μm</td>
-                                        <td>Forme de résistance, 4 noyaux, double coque réfringente, corps cristalloïdes</td>
-                                        <td>Agent de transmission</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE</div>
-                        <div class="info-item">
-                            <span class="info-label">Cycle Non-Pathogène :</span>
-                        </div>
-                        <div class="list-item">Ingestion de kystes contaminés</div>
-                        <div class="list-item">Transformation en forme minuta dans l'intestin</div>
-                        <div class="list-item">Multiplication par scissiparité</div>
-                        <div class="list-item">Enkystement et élimination avec les selles</div>
-                        
-                        <div class="info-item" style="margin-top: 15px;">
-                            <span class="info-label">Cycle Pathogène :</span>
-                        </div>
-                        <div class="list-item">Certaines conditions → Transformation en forme histolytica</div>
-                        <div class="list-item">Adhésion à la muqueuse colique</div>
-                        <div class="list-item">Libération d'enzymes protéolytiques et de cytokines</div>
-                        <div class="list-item">Lyse de la muqueuse → Ulcérations en bouton de chemise</div>
-                        <div class="list-item">Dissémination → Colonisation hépatique</div>
-                        <div class="list-item">Septicémie amibienne et chronicité</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Aliments souillés par selles contaminées</div>
-                        <div class="list-item">Mains sales (fécale-orale)</div>
-                        <div class="list-item">Eau contaminée</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Important :</div>
-                            <div class="warning-content">Les kystes résistent à la chloration et à la cuisson insuffisante. Forme minuta est très fragile dans le milieu extérieur.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES - AMIBIASE INTESTINALE</div>
-                        <div class="info-item">
-                            <span class="info-label">Période d'incubation :</span>
-                            <span class="info-value">2-3 semaines (asymptomatique pendant des années possible)</span>
-                        </div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Phase d'état (1-4 semaines) :</span>
-                        </div>
-                        <div class="list-item">Colite douloureuse</div>
-                        <div class="list-item">Épreintes et ténesmes</div>
-                        <div class="list-item">Diarrhées muco-sanglantes (crachats-fécaux)</div>
-                        <div class="list-item">Fièvre 38-39°C (variable)</div>
-                        <div class="list-item">Sueurs nocturnes</div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Complications (si non traité) :</span>
-                        </div>
-                        <div class="list-item">Hémorragies intestinales</div>
-                        <div class="list-item">Occlusions intestinales</div>
-                        <div class="list-item">Amibiase viscérale (foie, poumons, cerveau)</div>
-                        <div class="list-item">Chronicité post-amibienne</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC BIOLOGIQUE</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Aspect macroscopique : selles diarrhéiques muco-sanglantes</div>
-                        <div class="list-item">Examen direct sur selles fraîches sur plaque chauffante (37°C)</div>
-                        <div class="list-item">Recherche de trophozoïtes hématophages (diagnostic valide si hématies intra-amibienne)</div>
-                        <div class="list-item">Enrichissement : techniques de flottation (Faust) ou sédimentation (Richie)</div>
-                        <div class="list-item">Coloration MIF (Méthyléne-Iode-Formol) : observation du noyau, caryosome central petit et rond</div>
-                        <div class="list-item">Culture : multiplication des trophozoïtes</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Sérologie :</span>
-                        </div>
-                        <div class="list-item">Recherche d'anticorps spécifiques</div>
-                        <div class="list-item">Intérêt : amibiase hépatique, amibiase extraintestinale</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="info-item">
-                            <span class="info-label">Amoebicide Tissuaire :</span>
-                            <span class="info-value"><strong>Flagyl (Métronidazole)</strong></span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Durée :</span>
-                            <span class="info-value">Au minimum 10 jours</span>
-                        </div>
-                        <div class="note">
-                            <div class="note-title">💡 Note :</div>
-                            <div class="note-content">Le choix du traitement dépend du siège de l'infection (intestinale ou extraintestinale) et de la forme parasitaire présente.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔬 MORPHOLOGIE À L'EXAMEN</div>
-                        <div class="info-item">
-                            <span class="info-label">À l'état frais (Trophozoïte histolytica) :</span>
-                        </div>
-                        <div class="list-item">Taille 20-30 μm</div>
-                        <div class="list-item">Pseudopode hyalin, se déplace dans une direction</div>
-                        <div class="list-item">Cytoplasme finement granuleux avec vacuoles</div>
-                        <div class="list-item">Présence d'érythrocytes (hématophage = diagnostic valide)</div>
-                        <div class="list-item">Noyau non visible à l'état frais</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Au MIF (coloration) :</span>
-                        </div>
-                        <div class="list-item">Noyau : 3-8 μm avec membrane fine</div>
-                        <div class="list-item">Caryosome central petit et rond</div>
-                        <div class="list-item">Fond rouge permettant bonne visualisation</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Kyste à l'état frais :</span>
-                        </div>
-                        <div class="list-item">Double coque bien réfringente</div>
-                        <div class="list-item">Corps cristalloïdes incolores réfringents</div>
-                        <div class="list-item">Jusqu'à 4 noyaux</div>
-                    </div>
-                    
+        <div class="content">
+            
+            <!-- AMIBIASE -->
+            <div class="parasite-section protozoaire">
+                <div class="parasite-header">
+                    <span class="icon">🔴</span>
+                    AMIBIASE (Dysenterie amibienne)
+                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Entamoeba histolytica</strong>
+                                <div class="note">3 formes distinctes :
+                                    <ul>
+                                        <li><strong>Forme minuta</strong> (12-15 μm) : mobile, agent infestant</li>
+                                        <li><strong>Forme histolytica</strong> (20-30 μm) : hématophage, agent pathogène</li>
+                                        <li><strong>Forme kystique</strong> (12-14 μm) : 4 noyaux, agent de transmission</li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>À l'état frais :</strong> Protozoaire 20-30 μm émettant des pseudopodes hyalins, déplacement unidirectionnel. Cytoplasme finement granuleux avec vacuoles. Si présence d'hématies intra-amibiennes → <span class="danger">valide le diagnostic</span>
+                                <br><br>
+                                <strong>Après coloration MIF :</strong> Noyau visible (3-8 μm), membrane fine, caryosome central petit et rond
+                                <br><br>
+                                <strong>Kyste :</strong> Double coque bien réfringente, corps cristalloïdes, 4 noyaux maximum
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle non-pathogène :</strong> Kystes → transformation intestinale en forme minuta → multiplication par scissiparité → formation de kystes éliminés dans les selles
+                                <br><br>
+                                <strong>Cycle pathogène :</strong> Conditions favorables → transformation en formes histolytica → adhésion à la muqueuse colique → libération de cytokines et enzymes protéolytiques → ulcération en "bouton de chemise" → émission de mucus et sang → dissémination possible (septicémie amibienne) → colonisation hépatique
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="important">Oro-fécale</span>
+                                <ul>
+                                    <li>Mains sales</li>
+                                    <li>Aliments souillés par selles contaminées (contenant des kystes)</li>
+                                    <li>Eau contaminée</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Incubation :</strong> Asymptomatique pendant des années possible. Évolution de simple colite à dysenterie nécrotique
+                                <br><br>
+                                <strong>Phase d'état (1-4 semaines) :</strong>
+                                <ul>
+                                    <li>Colite douloureuse</li>
+                                    <li>Épreintes et ténesmes</li>
+                                    <li><span class="danger">Diarrhées muco-sanglantes = "crachats fécaux"</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen coprologique :</strong>
+                                <ul>
+                                    <li>Aspect macroscopique : selles diarrhéiques et muco-sanglantes</li>
+                                    <li>Examen direct sur selles fraîches (plaque chauffante 37°C)</li>
+                                    <li>Techniques de concentration : flottation (Faust) ou sédimentation (Ritchie)</li>
+                                    <li>Fixation au MIF (Mercuro-Iodo-Formol) pour analyse morphologique détaillée</li>
+                                    <li>Mise en culture pour multiplier les trophozoïtes</li>
+                                </ul>
+                                <div class="note">Recherche d'hématies intra-amibiennes = critère diagnostic important</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Sans traitement :</span>
+                                <ul>
+                                    <li>Hémorragies intestinales</li>
+                                    <li>Occlusions</li>
+                                    <li>Amibiase intestinale chronique</li>
+                                    <li>Amibiase viscérale (foie ++, poumon, cerveau)</li>
+                                    <li>Abcès hépatique : fièvre 38-39°C, sueurs nocturnes, douleur hypocondre droit irradiant en bretelle</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Amoebicides tissulaires :</strong> <span class="success">Flagyl (Métronidazole)</span>
+                                <br>
+                                Durée : <span class="important">Minimum 10 jours</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                Favorisée par :
+                                <ul>
+                                    <li>Chaleur et humidité</li>
+                                    <li>Mauvaises conditions d'hygiène</li>
+                                    <li>Manque d'eau potable</li>
+                                    <li>Péril fécal</li>
+                                </ul>
+                                Distribution : <span class="important">Mondiale, surtout pays tropicaux</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- GIARDIOSE -->
+            <div class="parasite-section protozoaire">
+                <div class="parasite-header">
+                    <span class="icon">🔴</span>
+                    GIARDIOSE (Giardiase)
+                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Giardia intestinalis</strong> (ou Giardia lamblia / Giardia duodenalis)
+                                <div class="note">Parasite flagellé du duodénum et de l'intestin grêle</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Forme végétative (trophozoïte) :</strong>
+                                <ul>
+                                    <li>Taille : 10-20 μm</li>
+                                    <li>Forme de poire ou de raquette</li>
+                                    <li>Face ventrale : disque suceur adhésif</li>
+                                    <li>2 noyaux, 4 paires de flagelles</li>
+                                    <li>Aspect "en face de clown" au microscope</li>
+                                </ul>
+                                <strong>Forme kystique :</strong>
+                                <ul>
+                                    <li>Taille : 8-12 μm</li>
+                                    <li>Forme ovale</li>
+                                    <li>4 noyaux visibles</li>
+                                    <li>Forme de résistance et de transmission</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle monoxène (un seul hôte) :</strong>
+                                <br>Ingestion de kystes → dékystement dans le duodénum → trophozoïtes se fixent à la muqueuse intestinale (disque suceur) → multiplication asexuée → enkystement dans le côlon → élimination des kystes dans les selles
+                                <div class="note">Les trophozoïtes provoquent une malabsorption en recouvrant la muqueuse intestinale</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="important">Oro-fécale</span>
+                                <ul>
+                                    <li>Eau contaminée (source principale)</li>
+                                    <li>Aliments crus souillés</li>
+                                    <li>Mains sales</li>
+                                    <li>Contact direct (collectivités, crèches)</li>
+                                </ul>
+                                <div class="note">Kystes très résistants dans l'environnement (plusieurs semaines dans l'eau froide)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Formes asymptomatiques fréquentes (porteurs sains)</strong>
+                                <br><br>
+                                <strong>Formes symptomatiques :</strong>
+                                <ul>
+                                    <li>Diarrhée aqueuse chronique (non sanglante)</li>
+                                    <li>Douleurs abdominales, crampes</li>
+                                    <li>Ballonnements, flatulences</li>
+                                    <li>Nausées, perte d'appétit</li>
+                                    <li>Selles grasses, nauséabondes (stéatorrhée)</li>
+                                    <li>Perte de poids, fatigue</li>
+                                    <li>Malabsorption (vitamines, nutriments)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen parasitologique des selles :</strong>
+                                <ul>
+                                    <li>Examen direct à l'état frais : recherche de kystes et trophozoïtes</li>
+                                    <li>Techniques de concentration (important car élimination intermittente)</li>
+                                    <li>Nécessité de 3 examens sur selles différentes</li>
+                                </ul>
+                                <strong>Autres méthodes :</strong>
+                                <ul>
+                                    <li>Test immunologique (recherche d'antigènes dans les selles)</li>
+                                    <li>Biopsie duodénale (rarement nécessaire)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Métronidazole (Flagyl)</strong> ou <strong>Tinidazole</strong>
+                                <br>Durée : 5-7 jours
+                                <br><br>
+                                Alternative : Nitazoxanide
+                                <div class="note">Traiter aussi les porteurs asymptomatiques en collectivité</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Hygiène des mains rigoureuse</li>
+                                    <li>Eau potable contrôlée</li>
+                                    <li>Lavage des légumes crus</li>
+                                    <li>Éviter l'eau non traitée en voyage</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Parasitose intestinale la plus fréquente dans le monde</span>
+                                <ul>
+                                    <li>Cosmopolite (partout)</li>
+                                    <li>Particulièrement fréquente chez les enfants</li>
+                                    <li>Collectivités (crèches, écoles)</li>
+                                    <li>Voyageurs ("diarrhée du voyageur")</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PALUDISME -->
+            <div class="parasite-section protozoaire">
+                <div class="parasite-header">
+                    <span class="icon">🔴</span>
+                    PALUDISME (Malaria)
+                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Plasmodium</strong> (genre de protozoaire)
+                                <br><br>
+                                <span class="danger">4 espèces principales :</span>
+                                <ul>
+                                    <li><strong>P. falciparum</strong> : le plus grave (paludisme mortel)</li>
+                                    <li><strong>P. vivax</strong> : reviviscence possible</li>
+                                    <li><strong>P. ovale</strong> : reviviscence possible</li>
+                                    <li><strong>P. malariae</strong> : fièvre quarte</li>
+                                </ul>
+                                <div class="note">P. knowlesi (5ème espèce) en Asie du Sud-Est</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                Formes intra-érythrocytaires visibles après <span class="important">coloration MGG (May-Grünwald-Giemsa)</span> :
+                                <ul>
+                                    <li><strong>Trophozoïtes jeunes</strong> : forme en anneau avec noyau périphérique</li>
+                                    <li><strong>Trophozoïtes âgés</strong> : plus volumineux</li>
+                                    <li><strong>Schizontes</strong> : contiennent plusieurs noyaux (mérozoïtes)</li>
+                                    <li><strong>Gamétocytes</strong> : formes sexuées (en croissant pour P. falciparum)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle hétéroxène (2 hôtes) :</strong>
+                                <br><br>
+                                <strong>Chez l'homme (hôte intermédiaire) :</strong>
+                                <ul>
+                                    <li>Phase hépatique : sporozoïtes → hépatocytes → schizontes hépatiques → mérozoïtes</li>
+                                    <li>Phase sanguine : mérozoïtes → invasion des hématies → multiplication → éclatement → nouveaux cycles</li>
+                                    <li>Formation de gamétocytes</li>
+                                </ul>
+                                <strong>Chez le moustique (hôte définitif) :</strong>
+                                <ul>
+                                    <li>Anophèle femelle ingère gamétocytes</li>
+                                    <li>Reproduction sexuée → sporozoïtes</li>
+                                    <li>Migration vers glandes salivaires</li>
+                                </ul>
+                                <div class="note">Reviviscence (P. vivax, P. ovale) : formes dormantes hépatiques (hypnozoïtes) → rechutes tardives</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="danger">Piqûre de moustique Anophèle femelle</span>
+                                <br><br>
+                                Autres modes (rares) :
+                                <ul>
+                                    <li>Transfusion sanguine</li>
+                                    <li>Transmission materno-fœtale</li>
+                                    <li>Partage de seringues</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Accès palustre simple :</strong>
+                                <ul>
+                                    <li>Fièvre périodique (tierce ou quarte selon l'espèce)</li>
+                                    <li>Frissons intenses</li>
+                                    <li>Sueurs profuses</li>
+                                    <li>Céphalées</li>
+                                    <li>Splénomégalie, anémie</li>
+                                </ul>
+                                <br>
+                                <strong>Paludisme grave (P. falciparum) :</strong>
+                                <ul>
+                                    <li><span class="danger">Neuropaludisme</span> : convulsions, coma</li>
+                                    <li>Anémie sévère</li>
+                                    <li>Détresse respiratoire</li>
+                                    <li>Insuffisance rénale</li>
+                                    <li>Hypoglycémie</li>
+                                    <li>Choc</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen microscopique (référence) :</strong>
+                                <ul>
+                                    <li><span class="important">Frottis sanguin + Goutte épaisse</span></li>
+                                    <li>Coloration MGG</li>
+                                    <li>Identification de l'espèce</li>
+                                    <li>Calcul de la parasitémie</li>
+                                </ul>
+                                <strong>Tests de diagnostic rapide (TDR) :</strong>
+                                <ul>
+                                    <li>Détection d'antigènes plasmodiaux</li>
+                                    <li>Résultats en 15-20 minutes</li>
+                                </ul>
+                                <strong>Biologie :</strong> Anémie, thrombopénie, hyperéosinophilie absente
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Urgence vitale si P. falciparum non traité :</span>
+                                <ul>
+                                    <li>Décès (surtout enfants, femmes enceintes)</li>
+                                    <li>Séquelles neurologiques</li>
+                                    <li>Splénomégalie chronique</li>
+                                    <li>Anémie chronique sévère</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Paludisme simple :</strong>
+                                <ul>
+                                    <li>Combinaisons à base d'artémisinine (ACT)</li>
+                                    <li>Chloroquine (si souche sensible)</li>
+                                </ul>
+                                <strong>Paludisme grave :</strong>
+                                <ul>
+                                    <li><span class="danger">Artésunate IV (urgence)</span></li>
+                                    <li>Quinine IV</li>
+                                    <li>Hospitalisation en réanimation</li>
+                                </ul>
+                                <strong>Prévention des rechutes (P. vivax, P. ovale) :</strong>
+                                <ul>
+                                    <li>Primaquine (éradique les hypnozoïtes)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <strong>Chimioprophylaxie (voyageurs en zone endémique) :</strong>
+                                <ul>
+                                    <li>Atovaquone-proguanil (Malarone)</li>
+                                    <li>Doxycycline</li>
+                                    <li>Méfloquine (Lariam)</li>
+                                </ul>
+                                <strong>Protection anti-vectorielle :</strong>
+                                <ul>
+                                    <li>Moustiquaires imprégnées d'insecticide</li>
+                                    <li>Répulsifs cutanés</li>
+                                    <li>Vêtements longs le soir</li>
+                                    <li>Insecticides dans les habitations</li>
+                                </ul>
+                                <strong>Vaccin :</strong> RTS,S/AS01 (Mosquirix) disponible depuis 2021 (protection partielle)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="danger">PANDÉMIE MONDIALE</span>
+                                <ul>
+                                    <li>241 millions de cas en 2020 (OMS)</li>
+                                    <li>627 000 décès/an (surtout Afrique subsaharienne)</li>
+                                    <li>Enfants de moins de 5 ans : 67% des décès</li>
+                                    <li>Zones endémiques : Afrique, Asie du Sud-Est, Amérique latine</li>
+                                </ul>
+                                <div class="note">Problème majeur de santé publique mondiale, maladie des régions tropicales et subtropicales</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TOXOPLASMOSE -->
+            <div class="parasite-section protozoaire">
+                <div class="parasite-header">
+                    <span class="icon">🔴</span>
+                    TOXOPLASMOSE
+                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Toxoplasma gondii</strong>
+                                <div class="note">Protozoaire intracellulaire obligatoire, parasite cosmopolite</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>3 formes :</strong>
+                                <ul>
+                                    <li><strong>Tachyzoïte</strong> : forme végétative en croissant (6 μm), multiplication rapide, phase aiguë</li>
+                                    <li><strong>Bradyzoïte</strong> : forme enkystée dans les tissus (muscles, cerveau), multiplication lente, phase chronique</li>
+                                    <li><strong>Oocystes</strong> : forme de résistance (10-12 μm), éliminés dans les selles de chat, très résistants dans l'environnement</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle hétéroxène :</strong>
+                                <br><br>
+                                <strong>Hôte définitif : Chat (félidés)</strong>
+                                <ul>
+                                    <li>Reproduction sexuée dans l'intestin</li>
+                                    <li>Élimination d'oocystes non sporulés</li>
+                                    <li>Sporulation en 1-5 jours dans l'environnement</li>
+                                </ul>
+                                <strong>Hôtes intermédiaires : Homme, mammifères, oiseaux</strong>
+                                <ul>
+                                    <li>Multiplication asexuée (tachyzoïtes)</li>
+                                    <li>Formation de kystes tissulaires (bradyzoïtes)</li>
+                                    <li>Persistance à vie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <strong>3 voies principales :</strong>
+                                <ul>
+                                    <li><span class="important">Ingestion d'oocystes</span> : manipulation de litière de chat, jardinage, légumes mal lavés</li>
+                                    <li><span class="important">Ingestion de kystes</span> : viande mal cuite (porc, mouton, bœuf)</li>
+                                    <li><span class="danger">Transmission congénitale</span> : de la mère au fœtus (primo-infection pendant la grossesse)</li>
+                                </ul>
+                                Autres : transfusion, greffe d'organe (rare)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Sujet immunocompétent :</strong>
+                                <ul>
+                                    <li>80-90% asymptomatique</li>
+                                    <li>Syndrome pseudo-grippal bénin</li>
+                                    <li>Adénopathies cervicales</li>
+                                    <li>Fatigue, fièvre modérée</li>
+                                </ul>
+                                <strong>Femme enceinte (primo-infection) :</strong>
+                                <ul>
+                                    <li><span class="danger">Toxoplasmose congénitale grave</span></li>
+                                    <li>1er trimestre : fausse couche, malformations sévères</li>
+                                    <li>2e-3e trimestre : atteinte neurologique, oculaire</li>
+                                    <li>Triade : hydrocéphalie, calcifications cérébrales, choriorétinite</li>
+                                </ul>
+                                <strong>Immunodéprimé (SIDA, chimiothérapie) :</strong>
+                                <ul>
+                                    <li>Réactivation de kystes tissulaires</li>
+                                    <li>Encéphalite toxoplasmique (abcès cérébraux)</li>
+                                    <li>Pneumonie, myocardite</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Sérologie (principal) :</strong>
+                                <ul>
+                                    <li><span class="important">Recherche d'anticorps IgG et IgM</span></li>
+                                    <li>IgM+ et IgG+ : infection récente</li>
+                                    <li>IgG+ seul : infection ancienne (immunité)</li>
+                                    <li>Séronégative : pas d'immunité (surveillance si grossesse)</li>
+                                    <li>Test d'avidité des IgG (datation de l'infection)</li>
+                                </ul>
+                                <strong>Diagnostic direct :</strong>
+                                <ul>
+                                    <li>PCR (liquide amniotique, sang, LCR)</li>
+                                    <li>Isolement du parasite (rarement)</li>
+                                </ul>
+                                <div class="note">Dépistage obligatoire pendant la grossesse (sérologie mensuelle si séronégative)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Toxoplasmose congénitale :</span>
+                                <ul>
+                                    <li>Retard mental</li>
+                                    <li>Épilepsie</li>
+                                    <li>Cécité (choriorétinite)</li>
+                                    <li>Surdité</li>
+                                    <li>Microcéphalie ou hydrocéphalie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Femme enceinte (primo-infection confirmée) :</strong>
+                                <ul>
+                                    <li><span class="success">Spiramycine (Rovamycine)</span> : empêche transmission au fœtus</li>
+                                    <li>Si fœtus infecté : Pyriméthamine + Sulfadiazine + Acide folinique</li>
+                                </ul>
+                                <strong>Immunodéprimé :</strong>
+                                <ul>
+                                    <li>Pyriméthamine + Sulfadiazine + Acide folinique</li>
+                                    <li>Traitement prolongé</li>
+                                </ul>
+                                <strong>Sujet immunocompétent :</strong> Pas de traitement généralement
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <strong>Pour les femmes enceintes séronégatives :</strong>
+                                <ul>
+                                    <li>Bien cuire la viande (67°C à cœur)</li>
+                                    <li>Laver soigneusement fruits et légumes</li>
+                                    <li>Porter des gants pour le jardinage</li>
+                                    <li>Éviter contact avec litière de chat (faire nettoyer par autre personne)</li>
+                                    <li>Se laver les mains régulièrement</li>
+                                </ul>
+                                Pas de vaccin disponible
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Parasitose cosmopolite très fréquente</span>
+                                <ul>
+                                    <li>30-50% de la population mondiale infectée</li>
+                                    <li>Prévalence variable selon pays (50-80% en France)</li>
+                                    <li>Augmente avec l'âge</li>
+                                    <li>Problème de santé publique : toxoplasmose congénitale</li>
+                                    <li>Surveillance obligatoire des femmes enceintes</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BILHARZIOSE -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    BILHARZIOSE (Schistosomiase)
+                    <span class="category-badge helm-badge">HELMINTHE - TRÉMATODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Schistosoma</strong> (vers plats, douves sanguines)
+                                <br><br>
+                                <span class="important">3 espèces principales :</span>
+                                <ul>
+                                    <li><strong>S. haematobium</strong> : bilharziose urinaire (Afrique, Moyen-Orient)</li>
+                                    <li><strong>S. mansoni</strong> : bilharziose intestinale (Afrique, Amérique du Sud)</li>
+                                    <li><strong>S. japonicum</strong> : bilharziose artério-veineuse (Asie)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes :</strong>
+                                <ul>
+                                    <li>Sexes séparés (dimorphisme sexuel)</li>
+                                    <li>Mâle : 10-15 mm, corps trapu avec canal gynécophore</li>
+                                    <li>Femelle : 15-20 mm, fine, logée dans le canal du mâle</li>
+                                    <li>Vivent en couple dans les veines</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>S. haematobium : éperon terminal (urines)</li>
+                                    <li>S. mansoni : éperon latéral (selles)</li>
+                                    <li>S. japonicum : petit éperon latéral (selles)</li>
+                                    <li>Taille : 50-150 μm selon l'espèce</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle hétéroxène (2 hôtes) :</strong>
+                                <br><br>
+                                <strong>Hôte définitif : Homme</strong>
+                                <ul>
+                                    <li>Pénétration cutanée des cercaires (eau douce contaminée)</li>
+                                    <li>Migration dans circulation → foie → maturation</li>
+                                    <li>Couples adultes dans veines mésentériques ou vésicales</li>
+                                    <li>Ponte d'œufs → migration à travers muqueuses</li>
+                                    <li>Élimination dans urines (S. haematobium) ou selles (S. mansoni/japonicum)</li>
+                                </ul>
+                                <strong>Hôte intermédiaire : Mollusque d'eau douce (Bulinus, Biomphalaria)</strong>
+                                <ul>
+                                    <li>Œufs → éclosion dans l'eau → miracidium</li>
+                                    <li>Pénétration du mollusque</li>
+                                    <li>Multiplication asexuée → sporocystes</li>
+                                    <li>Libération de cercaires (formes infestantes)</li>
+                                </ul>
+                                <div class="note">Durée de vie des vers adultes : 3-10 ans chez l'homme</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="danger">Pénétration transcutanée des cercaires</span>
+                                <ul>
+                                    <li>Contact avec eau douce contaminée (baignade, pêche, lessive, travaux agricoles)</li>
+                                    <li>Les cercaires traversent la peau saine en quelques minutes</li>
+                                    <li>Pas de transmission interhumaine directe</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Phase de pénétration (1-2 jours) :</strong>
+                                <ul>
+                                    <li>Dermatite des nageurs (prurit, éruption)</li>
+                                </ul>
+                                <strong>Phase d'invasion (3-8 semaines) - Fièvre de Katayama :</strong>
+                                <ul>
+                                    <li>Fièvre élevée</li>
+                                    <li>Urticaire</li>
+                                    <li>Hyperéosinophilie majeure</li>
+                                    <li>Hépatomégalie, splénomégalie</li>
+                                </ul>
+                                <strong>Phase d'état (chronique) :</strong>
+                                <br><em>S. haematobium (bilharziose urinaire) :</em>
+                                <ul>
+                                    <li><span class="danger">Hématurie terminale</span> (signe cardinal)</li>
+                                    <li>Dysurie, pollakiurie</li>
+                                    <li>Douleurs pelviennes</li>
+                                </ul>
+                                <em>S. mansoni/japonicum (bilharziose intestinale) :</em>
+                                <ul>
+                                    <li>Diarrhée chronique sanglante</li>
+                                    <li>Douleurs abdominales</li>
+                                    <li>Hépatomégalie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen parasitologique :</strong>
+                                <ul>
+                                    <li><span class="important">Recherche d'œufs dans les urines</span> (S. haematobium) - urines de 10h-14h</li>
+                                    <li>Recherche d'œufs dans les selles (S. mansoni/japonicum)</li>
+                                    <li>Techniques de concentration (sédimentation, filtration)</li>
+                                </ul>
+                                <strong>Biologie :</strong>
+                                <ul>
+                                    <li><span class="important">Hyperéosinophilie</span> (signe d'appel)</li>
+                                    <li>Sérologie : recherche d'anticorps</li>
+                                </ul>
+                                <strong>Imagerie :</strong>
+                                <ul>
+                                    <li>Échographie vésicale ou hépatique</li>
+                                    <li>Cystoscopie (lésions vésicales)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <strong>S. haematobium :</strong>
+                                <ul>
+                                    <li>Fibrose vésicale</li>
+                                    <li>Hydronéphrose, insuffisance rénale</li>
+                                    <li><span class="danger">Cancer de la vessie</span></li>
+                                    <li>Infertilité</li>
+                                </ul>
+                                <strong>S. mansoni/japonicum :</strong>
+                                <ul>
+                                    <li>Fibrose hépatique (périportale)</li>
+                                    <li>Hypertension portale</li>
+                                    <li>Varices œsophagiennes</li>
+                                    <li>Ascite</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong><span class="success">Praziquantel (Biltricide)</span></strong>
+                                <ul>
+                                    <li>Traitement de choix pour toutes les espèces</li>
+                                    <li>Dose unique : 40 mg/kg (S. haematobium, S. mansoni)</li>
+                                    <li>60 mg/kg pour S. japonicum</li>
+                                    <li>Très efficace sur les vers adultes</li>
+                                </ul>
+                                <div class="note">Contrôle parasitologique 3-6 mois après traitement</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Éviter baignade en eau douce contaminée</li>
+                                    <li>Porter bottes et gants (travaux en eau)</li>
+                                    <li>Traitement de masse des populations</li>
+                                    <li>Lutte contre les mollusques (molluscicides)</li>
+                                    <li>Amélioration assainissement</li>
+                                    <li>Éducation sanitaire</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="danger">PROBLÈME MAJEUR DE SANTÉ PUBLIQUE</span>
+                                <ul>
+                                    <li>240 millions de personnes infectées dans le monde</li>
+                                    <li>700 millions à risque</li>
+                                    <li>2ème parasitose tropicale après le paludisme</li>
+                                    <li>Zones endémiques : Afrique (90% des cas), Moyen-Orient, Amérique du Sud, Asie</li>
+                                    <li>Maladie de la pauvreté (eau insalubre, manque d'assainissement)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ASCARIDIOSE -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    ASCARIDIOSE (Ascaris)
+                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Ascaris lumbricoides</strong>
+                                <div class="note">Ver rond, le plus grand nématode intestinal de l'homme</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes :</strong>
+                                <ul>
+                                    <li>Ver cylindrique, allongé, blanc-rosé</li>
+                                    <li>Femelle : 20-35 cm de long, 3-6 mm de diamètre</li>
+                                    <li>Mâle : 15-20 cm, extrémité postérieure recourbée</li>
+                                    <li>Vivent dans l'intestin grêle</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>Ovoïdes, 50-75 μm</li>
+                                    <li>Coque épaisse mamelonnée brunâtre</li>
+                                    <li>Très résistants dans le milieu extérieur (plusieurs années)</li>
+                                    <li>Femelle pond 200 000 œufs/jour</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle monoxène (un seul hôte : l'homme) :</strong>
+                                <br><br>
+                                <span class="important">Cycle de Loos (cycle pulmonaire) :</span>
+                                <ul>
+                                    <li>Ingestion d'œufs embryonnés</li>
+                                    <li>Éclosion dans l'intestin grêle → libération de larves</li>
+                                    <li>Traversée de la paroi intestinale → circulation portale</li>
+                                    <li>Migration vers le foie puis poumons (5-10 jours)</li>
+                                    <li>Larves dans alvéoles → remontent bronches → trachée</li>
+                                    <li>Déglutition → retour à l'intestin grêle</li>
+                                    <li>Maturation en vers adultes (2-3 mois)</li>
+                                    <li>Ponte d'œufs non embryonnés éliminés dans les selles</li>
+                                    <li>Embryonnation dans le sol (2-3 semaines)</li>
+                                </ul>
+                                <div class="note">Durée de vie des vers adultes : 1-2 ans</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="important">Oro-fécale</span>
+                                <ul>
+                                    <li>Ingestion d'œufs embryonnés</li>
+                                    <li>Aliments souillés (légumes crus, fruits, eau)</li>
+                                    <li>Mains sales (péril fécal)</li>
+                                    <li>Géophagie (ingestion de terre contaminée)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Phase de migration larvaire (poumon) :</strong>
+                                <ul>
+                                    <li><span class="important">Syndrome de Löffler</span> : toux, dyspnée, fièvre</li>
+                                    <li>Infiltrats pulmonaires transitoires</li>
+                                    <li>Hyperéosinophilie importante</li>
+                                </ul>
+                                <strong>Phase intestinale :</strong>
+                                <ul>
+                                    <li>Souvent asymptomatique</li>
+                                    <li>Douleurs abdominales vagues</li>
+                                    <li>Troubles digestifs (nausées, diarrhée)</li>
+                                    <li>Dénutrition, retard de croissance (enfants)</li>
+                                    <li>Expulsion spontanée de vers (bouche, nez, selles)</li>
+                                </ul>
+                                <strong>Réactions allergiques :</strong>
+                                <ul>
+                                    <li>Urticaire</li>
+                                    <li>Prurit</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen parasitologique des selles :</strong>
+                                <ul>
+                                    <li><span class="important">Recherche d'œufs d'Ascaris</span></li>
+                                    <li>Examen direct ou après concentration</li>
+                                    <li>Œufs très caractéristiques</li>
+                                </ul>
+                                <strong>Autres :</strong>
+                                <ul>
+                                    <li>Visualisation de vers adultes expulsés</li>
+                                    <li>Imagerie : image de ver adulte (échographie, radiographie)</li>
+                                    <li><span class="important">Hyperéosinophilie sanguine</span> (phase larvaire)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Complications mécaniques (infestation massive) :</span>
+                                <ul>
+                                    <li><strong>Occlusion intestinale</strong> (pelote de vers)</li>
+                                    <li><strong>Appendicite</strong> aiguë</li>
+                                    <li><strong>Cholangite</strong>, angiocholite (migration dans voies biliaires)</li>
+                                    <li><strong>Pancréatite</strong> aiguë</li>
+                                    <li>Perforation intestinale</li>
+                                    <li>Volvulus</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Anthelminthiques :</strong>
+                                <ul>
+                                    <li><span class="success">Albendazole</span> : 400 mg dose unique</li>
+                                    <li><span class="success">Mébendazole</span> : 100 mg 2x/jour pendant 3 jours</li>
+                                    <li><span class="success">Flubendazole</span></li>
+                                    <li>Pyrantel pamoate</li>
+                                </ul>
+                                <div class="note">Traiter toute la famille si cas positif</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Hygiène des mains (lavage avant repas)</li>
+                                    <li>Laver soigneusement fruits et légumes</li>
+                                    <li>Éviter géophagie</li>
+                                    <li>Assainissement (latrines)</li>
+                                    <li>Éducation sanitaire</li>
+                                    <li>Déparasitage de masse (zones endémiques)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">PARASITOSE INTESTINALE LA PLUS FRÉQUENTE</span>
+                                <ul>
+                                    <li>1 milliard de personnes infectées dans le monde</li>
+                                    <li>Cosmopolite (surtout pays tropicaux et subtropicaux)</li>
+                                    <li>Affecte principalement les enfants</li>
+                                    <li>Zones rurales avec mauvais assainissement</li>
+                                    <li>Utilisation d'excréments humains comme engrais</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- OXYUROSE -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    OXYUROSE
+                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Enterobius vermicularis</strong>
+                                <div class="note">Petit ver rond, parasite spécifique de l'homme</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes :</strong>
+                                <ul>
+                                    <li>Petits vers blancs, filiformes</li>
+                                    <li>Femelle : 8-13 mm, extrémité postérieure effilée</li>
+                                    <li>Mâle : 2-5 mm, extrémité postérieure enroulée</li>
+                                    <li>Vivent dans le cæcum et le côlon</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>Asymétriques, 50-60 μm sur 20-30 μm</li>
+                                    <li>Coque lisse, transparente</li>
+                                    <li>Contiennent une larve enroulée</li>
+                                    <li>Très légers, volatils dans l'air</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle monoxène (un seul hôte : l'homme) :</strong>
+                                <br><br>
+                                <ul>
+                                    <li>Ingestion d'œufs embryonnés</li>
+                                    <li>Éclosion dans le duodénum → libération de larves</li>
+                                    <li>Migration vers le cæcum et le côlon</li>
+                                    <li>Maturation en vers adultes (2-6 semaines)</li>
+                                    <li>Fécondation des femelles</li>
+                                    <li>Femelles gravides migrent vers l'anus (surtout la nuit)</li>
+                                    <li>Ponte d'œufs sur la marge anale (10 000 œufs/femelle)</li>
+                                    <li>Embryonnation rapide (4-6 heures)</li>
+                                    <li>Auto-infestation fréquente (grattage anal)</li>
+                                </ul>
+                                <div class="note">Durée de vie des vers adultes : 1-2 mois</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="important">Oro-fécale et inhalation</span>
+                                <ul>
+                                    <li>Auto-infestation (grattage anal → mains → bouche)</li>
+                                    <li>Hétéro-infestation (contact direct avec personne infectée)</li>
+                                    <li>Inhalation d'œufs en suspension dans l'air (literie, vêtements)</li>
+                                    <li>Aliments, eau contaminés</li>
+                                    <li>Objets souillés (jouets, linge de toilette)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Principal symptôme :</strong>
+                                <ul>
+                                    <li><span class="important">Prurit anal nocturne intense</span> (caractéristique)</li>
+                                    <li>Dû à la migration des femelles et à la ponte</li>
+                                </ul>
+                                <strong>Autres symptômes :</strong>
+                                <ul>
+                                    <li>Troubles du sommeil, irritabilité</li>
+                                    <li>Énurésie (chez l'enfant)</li>
+                                    <li>Douleurs abdominales modérées</li>
+                                    <li>Perte d'appétit, nausées</li>
+                                    <li>Chez la fille : vulvovaginite (migration vers vulve)</li>
+                                </ul>
+                                <strong>Formes asymptomatiques fréquentes</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Méthode de référence :</strong>
+                                <ul>
+                                    <li><span class="important">Test de Graham (scotch-test anal)</span></li>
+                                    <li>Scotch transparent appliqué sur la marge anale le matin au réveil</li>
+                                    <li>Examen microscopique direct du scotch</li>
+                                    <li>Répéter 3 jours consécutifs pour augmenter la sensibilité</li>
+                                </ul>
+                                <strong>Autres méthodes :</strong>
+                                <ul>
+                                    <li>Visualisation directe des vers adultes (autour de l'anus la nuit)</li>
+                                    <li>Examen parasitologique des selles (peu sensible)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Rares mais possibles :</span>
+                                <ul>
+                                    <li>Surinfection des lésions de grattage</li>
+                                    <li>Vulvovaginite chez la petite fille</li>
+                                    <li>Urétrite, cystite</li>
+                                    <li>Appendicite à oxyures (rare)</li>
+                                    <li>Granulomes péritonéaux</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Anthelminthiques :</strong>
+                                <ul>
+                                    <li><span class="success">Flubendazole</span> : dose unique, répétée 15 jours après</li>
+                                    <li><span class="success">Mébendazole</span> : 100 mg dose unique, répétée 15 jours après</li>
+                                    <li><span class="success">Pyrantel pamoate</span> : 10 mg/kg dose unique, répétée 15 jours après</li>
+                                </ul>
+                                <strong>Mesures associées :</strong>
+                                <ul>
+                                    <li>Traiter toute la famille simultanément</li>
+                                    <li>Lavage du linge de lit et des vêtements à 60°C</li>
+                                    <li>Nettoyage soigneux de la maison</li>
+                                    <li>Hygiène rigoureuse des mains (ongles courts)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Hygiène personnelle rigoureuse (lavage des mains)</li>
+                                    <li>Ongles courts et brossés</li>
+                                    <li>Changement fréquent du linge de lit</li>
+                                    <li>Nettoyage régulier des sanitaires</li>
+                                    <li>Éviter le partage des serviettes de toilette</li>
+                                    <li>Éducation sanitaire en collectivité</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Très fréquente dans le monde entier</span>
+                                <ul>
+                                    <li>Cosmopolite, surtout pays tempérés</li>
+                                    <li>Particulièrement fréquente chez les enfants (3-10 ans)</li>
+                                    <li>Collectivités (écoles, crèches, orphelinats)</li>
+                                    <li>Transmission familiale fréquente</li>
+                                    <li>Toutes classes sociales</li>
+                                </ul>
+                                <div class="note">L'oxyurose est la parasitose intestinale la plus fréquente dans les pays industrialisés</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TRICHOCÉPHALOSE -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    TRICHOCÉPHALOSE (Trichuriase)
+                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>Trichuris trichiura</strong> (ver fouet)
+                                <div class="note">Parasite du gros intestin, spécifique de l'homme</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes :</strong>
+                                <ul>
+                                    <li>Forme caractéristique en "fouet"</li>
+                                    <li>Partie antérieure fine et effilée (2/3 du corps)</li>
+                                    <li>Partie postérieure épaisse (1/3 du corps)</li>
+                                    <li>Femelle : 35-50 mm</li>
+                                    <li>Mâle : 30-45 mm, extrémité postérieure enroulée</li>
+                                    <li>Partie antérieure enfouie dans la muqueuse colique</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>Forme caractéristique de "tonneau" ou "citron"</li>
+                                    <li>50-55 μm sur 20-25 μm</li>
+                                    <li>Coque épaisse, lisse, brunâtre</li>
+                                    <li>2 bouchons polaires transparents</li>
+                                    <li>Contient 1 cellule à la ponte</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle monoxène (un seul hôte : l'homme) :</strong>
+                                <br><br>
+                                <ul>
+                                    <li>Ingestion d'œufs embryonnés (forme infestante)</li>
+                                    <li>Éclosion dans l'intestin grêle → libération de larves</li>
+                                    <li>Migration vers le cæcum et le côlon</li>
+                                    <li>Maturation en vers adultes (environ 3 mois)</li>
+                                    <li>Partie antérieure s'enfonce dans la muqueuse colique</li>
+                                    <li>Ponte d'œufs non embryonnés éliminés dans les selles</li>
+                                    <li>Embryonnation dans le sol (3 semaines à 3 mois)</li>
+                                    <li>Œufs très résistants dans l'environnement (plusieurs années)</li>
+                                </ul>
+                                <div class="note">Durée de vie des vers adultes : 1-3 ans</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="important">Oro-fécale</span>
+                                <ul>
+                                    <li>Ingestion d'œufs embryonnés</li>
+                                    <li>Aliments souillés (légumes crus)</li>
+                                    <li>Eau contaminée</li>
+                                    <li>Mains sales (péril fécal)</li>
+                                    <li>Géophagie (enfants)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Infestations légères :</strong>
+                                <ul>
+                                    <li>Souvent asymptomatique</li>
+                                    <li>Douleurs abdominales modérées</li>
+                                </ul>
+                                <strong>Infestations massives :</strong>
+                                <ul>
+                                    <li>Douleurs abdominales importantes</li>
+                                    <li>Diarrhée chronique</li>
+                                    <li>Anémie (saignements muqueux)</li>
+                                    <li>Retard staturo-pondéral (enfants)</li>
+                                    <li>Rectocolite hémorragique-like</li>
+                                    <li>Prolapsus rectal (chez l'enfant)</li>
+                                </ul>
+                                <div class="note">La gravité est proportionnelle à l'intensité de l'infestation</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen parasitologique des selles :</strong>
+                                <ul>
+                                    <li><span class="important">Recherche d'œufs caractéristiques</span></li>
+                                    <li>Examen direct ou après concentration</li>
+                                    <li>Œufs facilement reconnaissables (forme de tonneau avec bouchons polaires)</li>
+                                </ul>
+                                <strong>Autres :</strong>
+                                <ul>
+                                    <li>Rectoscopie : visualisation des vers adultes</li>
+                                    <li>Hyperéosinophilie modérée</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Infestations massives :</span>
+                                <ul>
+                                    <li>Anémie sévère</li>
+                                    <li>Dénutrition</li>
+                                    <li>Retard de croissance</li>
+                                    <li>Prolapsus rectal</li>
+                                    <li>Appendicite</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Anthelminthiques :</strong>
+                                <ul>
+                                    <li><span class="success">Mébendazole</span> : 100 mg 2x/jour pendant 3 jours</li>
+                                    <li><span class="success">Albendazole</span> : 400 mg/jour pendant 3 jours</li>
+                                    <li><span class="success">Ivermectine</span> : 200 μg/kg/jour pendant 3 jours</li>
+                                </ul>
+                                <div class="note">Traitement de l'entourage familial en cas d'infestation confirmée</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Hygiène des mains</li>
+                                    <li>Lavage soigneux des légumes crus</li>
+                                    <li>Éviter la défécation à l'air libre</li>
+                                    <li>Utilisation de latrines</li>
+                                    <li>Éducation sanitaire</li>
+                                    <li>Déparasitage de masse en zones endémiques</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Fréquente dans les régions tropicales</span>
+                                <ul>
+                                    <li>500 millions de personnes infectées dans le monde</li>
+                                    <li>Cosmopolite (surtout zones tropicales humides)</li>
+                                    <li>Affecte principalement les enfants</li>
+                                    <li>Zones rurales avec mauvaises conditions d'hygiène</li>
+                                    <li>Utilisation d'excréments humains comme engrais</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ANKYLOSTOMOSE -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    ANKYLOSTOMOSE (Ankylostome)
+                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>2 espèces principales :</strong>
+                                <ul>
+                                    <li><strong>Ancylostoma duodenale</strong></li>
+                                    <li><strong>Necator americanus</strong></li>
+                                </ul>
+                                <div class="note">Vers hématophages de l'intestin grêle</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes :</strong>
+                                <ul>
+                                    <li>Petits vers cylindriques, blanc-rosé</li>
+                                    <li>Taille : 8-13 mm</li>
+                                    <li>Capsule buccale avec dents ou lames coupantes</li>
+                                    <li>A. duodenale : 2 paires de dents</li>
+                                    <li>N. americanus : 1 paire de plaques coupantes</li>
+                                    <li>Vivent fixés à la muqueuse duodénale</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>Ovoïdes, 60-75 μm sur 35-40 μm</li>
+                                    <li>Coque mince, transparente</li>
+                                    <li>Contiennent 4 à 8 blastomères</li>
+                                    <li>Indistinguables entre les 2 espèces</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle monoxène (un seul hôte : l'homme) :</strong>
+                                <br><br>
+                                <ul>
+                                    <li>Élimination d'œufs dans les selles</li>
+                                    <li>Éclosion dans le sol → libération de larves rhabditoïdes</li>
+                                    <li>Transformation en larves strongyloïdes infestantes</li>
+                                    <li>Pénétration active à travers la peau saine</li>
+                                    <li>Migration sanguine → poumons</li>
+                                    <li>Traversée des alvéoles → remontée trachéale</li>
+                                    <li>Déglutition → arrivée dans l'intestin grêle</li>
+                                    <li>Maturation en vers adultes (5-6 semaines)</li>
+                                    <li>Fixation à la muqueuse duodénale (hématophagie)</li>
+                                </ul>
+                                <div class="note">Durée de vie des vers adultes : 1-5 ans</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <span class="danger">Pénétration transcutanée des larves</span>
+                                <ul>
+                                    <li>Marche pieds nus sur sol contaminé</li>
+                                    <li>Contact cutané avec terre humide</li>
+                                    <li>Rarement par ingestion de larves</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Phase d'invasion :</strong>
+                                <ul>
+                                    <li>Dermatite au point de pénétration ("prurit des mineurs")</li>
+                                    <li>Phase pulmonaire : toux, dyspnée (syndrome de Löffler)</li>
+                                </ul>
+                                <strong>Phase d'état :</strong>
+                                <ul>
+                                    <li>Douleurs épigastriques (type ulcéreux)</li>
+                                    <li>Troubles digestifs (nausées, diarrhée)</li>
+                                    <li><span class="danger">Anémie microcytaire hypochrome</span> (signe cardinal)</li>
+                                    <li>Pâleur, asthénie, dyspnée d'effort</li>
+                                    <li>Œdèmes des membres inférieurs</li>
+                                    <li>Retard de croissance (enfants)</li>
+                                </ul>
+                                <div class="note">Chaque ver consomme 0,2-0,3 ml de sang/jour</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Examen parasitologique des selles :</strong>
+                                <ul>
+                                    <li><span class="important">Recherche d'œufs caractéristiques</span></li>
+                                    <li>Examen direct ou après concentration</li>
+                                    <li>Culture des larves (méthode de Harada-Mori)</li>
+                                </ul>
+                                <strong>Biologie :</strong>
+                                <ul>
+                                    <li><span class="danger">Anémie ferriprive</span></li>
+                                    <li>Hyperéosinophilie importante</li>
+                                    <li>Hypoalbuminémie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <span class="danger">Infestations massives :</span>
+                                <ul>
+                                    <li>Anémie sévère avec décompensation cardiaque</li>
+                                    <li>Cachexie</li>
+                                    <li>Retard mental et physique (enfants)</li>
+                                    <li>Complications de la grossesse</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Anthelminthiques :</strong>
+                                <ul>
+                                    <li><span class="success">Albendazole</span> : 400 mg dose unique</li>
+                                    <li><span class="success">Mébendazole</span> : 100 mg 2x/jour pendant 3 jours</li>
+                                    <li><span class="success">Pyrantel pamoate</span> : 10 mg/kg pendant 3 jours</li>
+                                </ul>
+                                <strong>Traitement de l'anémie :</strong>
+                                <ul>
+                                    <li>Supplémentation en fer</li>
+                                    <li>Transfusion si anémie sévère</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Port de chaussures</li>
+                                    <li>Éviter contact cutané avec sol contaminé</li>
+                                    <li>Assainissement (latrines)</li>
+                                    <li>Éducation sanitaire</li>
+                                    <li>Déparasitage de masse</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Problème de santé publique majeur</span>
+                                <ul>
+                                    <li>500-700 millions de personnes infectées</li>
+                                    <li>Zones tropicales et subtropicales</li>
+                                    <li>Maladie des populations défavorisées</li>
+                                    <li>Agriculteurs, mineurs, enfants</li>
+                                    <li>Ancylostoma duodenale : bassin méditerranéen, Asie</li>
+                                    <li>Necator americanus : Afrique, Amérique, Asie</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAENIA -->
+            <div class="parasite-section helminthe">
+                <div class="parasite-header">
+                    <span class="icon">🟢</span>
+                    TAENIA (Téniasis et Cysticercose)
+                    <span class="category-badge helm-badge">HELMINTHE - CESTODE</span>
+                </div>
+                <div class="parasite-content">
+                    <table>
+                        <tr>
+                            <th>Agent Pathogène</th>
+                            <td>
+                                <strong>2 espèces principales :</strong>
+                                <ul>
+                                    <li><strong>Taenia saginata</strong> (ténia du bœuf) : 4-10 mètres</li>
+                                    <li><strong>Taenia solium</strong> (ténia du porc) : 2-4 mètres</li>
+                                </ul>
+                                <div class="note">Vers plats en forme de ruban</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Morphologie</th>
+                            <td>
+                                <strong>Vers adultes (intestin) :</strong>
+                                <ul>
+                                    <li>Corps plat, segmenté (strobile)</li>
+                                    <li>Tête (scolex) avec ventouses</li>
+                                    <li>T. saginata : scolex sans crochets, 4 ventouses</li>
+                                    <li>T. solium : scolex avec rostre à double couronne de crochets</li>
+                                    <li>Anneaux (proglottis) matures contenant l'utérus ramifié</li>
+                                </ul>
+                                <strong>Œufs (diagnostic) :</strong>
+                                <ul>
+                                    <li>Sphériques, 30-40 μm de diamètre</li>
+                                    <li>Coque épasse, striée radialement</li>
+                                    <li>Contiennent un embryon hexacanthe (6 crochets)</li>
+                                    <li>Indistinguables entre les 2 espèces</li>
+                                </ul>
+                                <strong>Formes larvaires :</strong>
+                                <ul>
+                                    <li>Cysticerque : vésicule liquidienne contenant un scolex</li>
+                                    <li>Localisation musculaire (T. saginata) ou divers tissus (T. solium)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Cycle Parasitaire</th>
+                            <td>
+                                <strong>Cycle hétéroxène (2 hôtes) :</strong>
+                                <br><br>
+                                <strong>Téniasis (forme adulte) :</strong>
+                                <ul>
+                                    <li>Hôte définitif : Homme (porteur du ver adulte)</li>
+                                    <li>Élimination d'anneaux gravides dans les selles</li>
+                                    <li>Libération d'œufs dans l'environnement</li>
+                                    <li>Ingestion par l'hôte intermédiaire</li>
+                                    <li>Bœuf (T. saginata) ou porc (T. solium)</li>
+                                    <li>Éclosion dans l'intestin → libération d'embryon hexacanthe</li>
+                                    <li>Migration vers les muscles → formation de cysticerques</li>
+                                    <li>Homme s'infecte en consommant de la viande crue ou mal cuite</li>
+                                    <li>Dévagination du cysticerque dans l'intestin → développement en ver adulte</li>
+                                </ul>
+                                <strong>Cysticercose (T. solium uniquement) :</strong>
+                                <ul>
+                                    <li>Auto-infestation ou hétéro-infestation par les œufs de T. solium</li>
+                                    <li>Développement de cysticerques dans divers tissus (cerveau, muscles, œil)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contamination</th>
+                            <td>
+                                <strong>Téniasis :</strong>
+                                <ul>
+                                    <li><span class="important">Ingestion de viande bovine ou porcine crue ou mal cuite contenant des cysticerques</span></li>
+                                    <li>"Steak tartare", viande saignante</li>
+                                </ul>
+                                <strong>Cysticercose (T. solium uniquement) :</strong>
+                                <ul>
+                                    <li><span class="danger">Ingestion d'œufs de T. solium</span> (main sale, aliments souillés)</li>
+                                    <li>Auto-infestation (main-bouche)</li>
+                                    <li>Hétéro-infestation (contact avec porteur de T. solium)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Signes Cliniques</th>
+                            <td>
+                                <strong>Téniasis (ver adulte) :</strong>
+                                <ul>
+                                    <li>Souvent asymptomatique</li>
+                                    <li>Troubles digestifs modérés</li>
+                                    <li>Douleurs abdominales</li>
+                                    <li>Troubles de l'appétit</li>
+                                    <li>Élimination d'anneaux dans les selles ou les sous-vêtements</li>
+                                    <li>Prurit anal</li>
+                                </ul>
+                                <strong>Cysticercose (T. solium) :</strong>
+                                <ul>
+                                    <li><span class="danger">Neurocysticercose</span> (localisation cérébrale) :</li>
+                                    <ul>
+                                        <li>Épilepsie (manifestation la plus fréquente)</li>
+                                        <li>Céphalées, hypertension intracrânienne</li>
+                                        <li>Troubles psychiatriques</li>
+                                        <li>Déficits neurologiques focaux</li>
+                                    </ul>
+                                    <li>Cysticercose oculaire : baisse d'acuité visuelle</li>
+                                    <li>Cysticercose musculaire : nodules sous-cutanés</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Diagnostic</th>
+                            <td>
+                                <strong>Téniasis :</strong>
+                                <ul>
+                                    <li>Examen macroscopique des anneaux (identification de l'espèce)</li>
+                                    <li>Examen parasitologique des selles (recherche d'œufs)</li>
+                                    <li>Test au scotch anal (comme pour l'oxyurose)</li>
+                                </ul>
+                                <strong>Cysticercose :</strong>
+                                <ul>
+                                    <li>Imagerie : Scanner ou IRM cérébrale (visualisation des kystes)</li>
+                                    <li>Sérologie spécifique (recherche d'anticorps)</li>
+                                    <li>Biopsie des nodules sous-cutanés</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Complications</th>
+                            <td>
+                                <strong>Cysticercose cérébrale :</strong>
+                                <ul>
+                                    <li><span class="danger">Épilepsie chronique</span></li>
+                                    <li>Hydrocéphalie obstructive</li>
+                                    <li>Accidents vasculaires cérébraux</li>
+                                    <li>Démence</li>
+                                    <li>Décès</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Traitement</th>
+                            <td>
+                                <strong>Téniasis :</strong>
+                                <ul>
+                                    <li><span class="success">Praziquantel</span> : 10-20 mg/kg dose unique</li>
+                                    <li><span class="success">Niclosamide</span> : 2 g dose unique</li>
+                                </ul>
+                                <strong>Cysticercose active :</strong>
+                                <ul>
+                                    <li><span class="success">Albendazole</span> : 15 mg/kg/jour pendant 8-30 jours</li>
+                                    <li>+ Corticoïdes pour prévenir l'inflammation</li>
+                                    <li>Traitement anti-épileptique si nécessaire</li>
+                                    <li>Chirurgie dans certains cas (kystes uniques, hydrocéphalie)</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Prévention</th>
+                            <td>
+                                <ul>
+                                    <li>Cuisson suffisante de la viande de bœuf et de porc (>65°C à cœur)</li>
+                                    <li>Congélation de la viande (-20°C pendant 10 jours)</li>
+                                    <li>Inspection vétérinaire des viandes</li>
+                                    <li>Hygiène des mains (lavage après toilette)</li>
+                                    <li>Éviter l'utilisation d'excréments humains comme engrais</li>
+                                    <li>Éducation sanitaire</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Épidémiologie</th>
+                            <td>
+                                <span class="important">Distribution mondiale</span>
+                                <ul>
+                                    <li>T. saginata : cosmopolite, surtout pays consommateurs de bœuf cru</li>
+                                    <li>T. solium : Amérique latine, Afrique, Asie, Europe de l'Est</li>
+                                    <li>50 millions de personnes infectées par des ténias</li>
+                                    <li>Cysticercose : 2,5-8 millions de cas, cause majeure d'épilepsie acquise</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-        
-        <!-- ASCARIS LUMBRICOIDES -->
-        <div id="ascaris" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🪱 Ascaris lumbricoides</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasite :</span>
-                            <span class="info-value">Nématode (ver rond) métazoaire pluricellulaire</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Classification :</span>
-                            <span class="info-value">Classe Nematoda, Ordre Ascaridida</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, monoxène, obligatoire</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">Adulte : 20-35 cm (femelle plus grande que mâle)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Forme :</span>
-                            <span class="info-value">Allongée, cylindrique, blanc rosâtre</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔄 FORMES PARASITAIRES</div>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Forme</th>
-                                        <th>Localisation</th>
-                                        <th>Durée</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Œuf embryonné</strong></td>
-                                        <td>Milieu extérieur, sol</td>
-                                        <td>2-3 semaines pour embryonnement</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Larve L1, L2, L3, L4</strong></td>
-                                        <td>Pulmonaire puis intestinale</td>
-                                        <td>8-14 jours</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Adulte</strong></td>
-                                        <td>Intestin grêle</td>
-                                        <td>12-18 mois</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (Oviparité)</div>
-                        <div class="list-item">Ingestion d'œufs embryonnés contaminés</div>
-                        <div class="list-item">Éclosion dans l'intestin grêle → Larves L1</div>
-                        <div class="list-item">Traversée de la muqueuse intestinale</div>
-                        <div class="list-item">Migration circulatoire pulmonaire (7-10 jours)</div>
-                        <div class="list-item">Passage trachéobronchique</div>
-                        <div class="list-item">Ré-ingestion et retour intestinal</div>
-                        <div class="list-item">Maturation en adulte dans l'intestin grêle (lumière)</div>
-                        <div class="list-item">Ponte d'œufs (femelle pond 200 000/jour)</div>
-                        <div class="list-item">Élimination fécale → embryonnement en 2-3 semaines</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Aliments souillés par selles contaminées</div>
-                        <div class="list-item">Mains sales (fécale-orale)</div>
-                        <div class="list-item">Geophagie (consommation de terre)</div>
-                        <div class="list-item">Inhalation de poussière contaminée</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES</div>
-                        <div class="info-item">
-                            <span class="info-label">Période d'incubation :</span>
-                            <span class="info-value">4-14 jours</span>
-                        </div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Syndrome Pulmonaire (ascaridose pulmonaire) :</span>
-                        </div>
-                        <div class="list-item">Toux, dyspnée</div>
-                        <div class="list-item">Fièvre, frissons</div>
-                        <div class="list-item">Hyperéosinophilie (réaction allergique)</div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Manifestations Intestinales :</span>
-                        </div>
-                        <div class="list-item">Douleurs abdominales</div>
-                        <div class="list-item">Diarrhée ou constipation</div>
-                        <div class="list-item">Syndrome d'occlusion (charge parasitaire importante)</div>
-                        <div class="list-item">Malabsorption → Retard de croissance (enfants)</div>
-                        <div class="list-item">Anémie</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Complications :</div>
-                            <div class="warning-content">Occlusion intestinale, invagination, appendicite, iléus paralytique, perforation</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Détection d'œufs à l'examen direct des selles</div>
-                        <div class="list-item">Œufs : 45-75 μm, bruns, coque rugueuse</div>
-                        <div class="list-item">Examen au microscope ordinaire</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Examen Clinique :</span>
-                        </div>
-                        <div class="list-item">Observation d'adultes à l'oeil nu dans les selles ou les vomissements</div>
-                        <div class="list-item">NFS : hyperéosinophilie (élévation des polynucléaires éosinophiles)</div>
-                        <div class="list-item">Radiologie : opacification intestinale</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Albendazole 400 mg en dose unique</div>
-                        <div class="list-item">Mébendazole 100 mg × 2/jour pendant 3 jours</div>
-                        <div class="list-item">Levamisole 150 mg en dose unique</div>
-                    </div>
-                    
-                    <div class="note">
-                        <div class="note-title">💡 Points clés :</div>
-                        <div class="note-content">Parasite très fréquent en régions tropicales et subtropicales. Migration pulmonaire obligatoire. Source majeure de malnutrition chez l'enfant. Transmission orofécale.</div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <!-- OXYURE -->
-        <div id="oxyure" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🪱 Oxyure (Enterobius vermicularis)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasite :</span>
-                            <span class="info-value">Nématode (petit ver blanc)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">Male : 2-5 mm | Femelle : 8-13 mm</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, monoxène, obligatoire, permanent</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (Court - 4-6 semaines)</div>
-                        <div class="list-item">Ingestion d'œufs embryonnés</div>
-                        <div class="list-item">Maturation dans le cæcum et côlon</div>
-                        <div class="list-item">Ponte nocturne par femelles au périné (provoque prurit)</div>
-                        <div class="list-item">Œufs deviennent embryonnés en 4-6 heures</div>
-                        <div class="list-item">Ré-infestation par mains souillées (à soi-même = autoinfection)</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Fécale-orale (prédominant)</div>
-                        <div class="list-item">Inhalation d'œufs dans la poussière</div>
-                        <div class="list-item">Contact directe (chambre, lit, linge contaminé)</div>
-                        <div class="list-item">Autoinfection fréquente (surtout enfant)</div>
-                        <div class="note">
-                            <div class="note-title">💡 Particularité :</div>
-                            <div class="note-content">Ne nécessite pas de développement extérieur. Très contagieux. Épidémies en collectivités (écoles, crèches).</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES</div>
-                        <div class="info-item">
-                            <span class="info-label">Symptôme Majeur :</span>
-                            <span class="info-value"><strong>Prurit anal NOCTURNE</strong> (peut être intense)</span>
-                        </div>
-                        <div class="list-item">Troubles du sommeil, insomnie</div>
-                        <div class="list-item">Irritabilité, nervosité</div>
-                        <div class="list-item">Douleurs abdominales légères</div>
-                        <div class="list-item">Diarrhée rare, constipation possible</div>
-                        <div class="list-item">Énurésie (chez l'enfant)</div>
-                        <div class="list-item">Vulvite, vaginite (femelle migre vers vagin)</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Complications :</div>
-                            <div class="warning-content">Rarement graves. Surinfection par grattage. Rarement appendicite.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Méthode Principale : Scotch-test (cellophane adhésive)</span>
-                        </div>
-                        <div class="list-item">Application le matin au lever avant toilette</div>
-                        <div class="list-item">Visualisation des œufs au microscope</div>
-                        <div class="list-item">Sensibilité : 90-100% si bien réalisé</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Détection d'œufs (mais moins fiable que scotch-test)</div>
-                        <div class="list-item">Œufs : 50-60 μm, asymétriques</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Examen Clinique :</span>
-                        </div>
-                        <div class="list-item">Observation des oxyures adultes dans les selles ou au périné</div>
-                        <div class="list-item">NFS : pas d'hyperéosinophilie typiquement</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Mébendazole 100 mg en dose unique (répéter à J3 et J14)</div>
-                        <div class="list-item">Albendazole 400 mg en dose unique</div>
-                        <div class="list-item">Pyrantel 10 mg/kg en dose unique</div>
-                        <div class="note">
-                            <div class="note-title">💡 Important :</div>
-                            <div class="note-content">Traiter toute la famille. Laver literie, vêtements. Coupes d'ongles. Hygiène stricte. Répéter traitement à J3-J14 du fait de l'autoinfection.</div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <!-- ANKYLOSTOME -->
-        <div id="ankylostome" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🪱 Ankylostome (Necator americanus / Ancylostoma duodenale)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasites :</span>
-                            <span class="info-value">Nématodes hématophages (consomment le sang)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">8-13 mm</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Forme :</span>
-                            <span class="info-value">Blanc rosâtre, très petit</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, hétéroxène, obligatoire</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (3-7 semaines)</div>
-                        <div class="list-item">Ponte d'œufs dans le sol (milieu extérieur)</div>
-                        <div class="list-item">Développement des larves L1, L2 en 24-48 heures</div>
-                        <div class="list-item">Larves L3 infectieuses (restent dans sol humide)</div>
-                        <div class="list-item">Pénétration percutanée (contact peau nue avec sol)</div>
-                        <div class="list-item">Migration circulatoire pulmonaire</div>
-                        <div class="list-item">Passage trachéobronchique</div>
-                        <div class="list-item">Ré-ingestion et maturation intestinale</div>
-                        <div class="list-item">Fixation à la muqueuse (adhérence des crochets)</div>
-                        <div class="list-item">Ponte 1-2 semaines après infestation</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Pénétration percutanée de larves L3 (contact peau/sol)</div>
-                        <div class="list-item">Marche pieds nus sur sol contaminé</div>
-                        <div class="list-item">Contact des mains avec sol souillé</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Particularité :</div>
-                            <div class="warning-content">Pénétration cutanée peut provoquer dermatite ("hookworm dermatitis"). Larves migrent dans la peau causant prurit et traçés érythémateux.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES</div>
-                        <div class="info-item">
-                            <span class="info-label">Au niveau de la pénétration cutanée :</span>
-                        </div>
-                        <div class="list-item">Démangeaisons locales intenses ("ground itch")</div>
-                        <div class="list-item">Éruption érythémateuse</div>
-                        <div class="list-item">Sensation de brûlure</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Phase Pulmonaire :</span>
-                        </div>
-                        <div class="list-item">Toux, dyspnée légère</div>
-                        <div class="list-item">Fièvre modérée</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Manifestations Intestinales :</span>
-                        </div>
-                        <div class="list-item">Douleurs épigastriques, crampes abdominales</div>
-                        <div class="list-item">Diarrhée, constipation (alternance)</div>
-                        <div class="list-item">Hémorragies occultes (saignements microscopiques)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Signes Généraux :</span>
-                        </div>
-                        <div class="list-item">ANÉMIE ferriprive (principal effet pathogène)</div>
-                        <div class="list-item">Carence en fer, protéine</div>
-                        <div class="list-item">Retard de croissance (enfants)</div>
-                        <div class="list-item">Faiblesse, asthénie</div>
-                        <div class="list-item">Dyspnée d'effort</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Important :</div>
-                            <div class="warning-content">Chaque ver adulte consomme 0,5 mL sang/jour. Charge parasitaire massive = anémie sévère, insuffisance cardiaque, œdème (kwashiorkor parasitaire).</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Détection d'œufs dans les selles</div>
-                        <div class="list-item">Œufs : 58-76 μm, transparents, coque fine</div>
-                        <div class="list-item">Techniques d'enrichissement (flottation, sédimentation)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Biologie :</span>
-                        </div>
-                        <div class="list-item">NFS : Anémie microcytaire hypochrome</div>
-                        <div class="list-item">Ferritine basse, sidérémie basse</div>
-                        <div class="list-item">Hyperéosinophilie (modérée)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Diagnostic différentiel :</span>
-                        </div>
-                        <div class="list-item">Ne pas confondre avec autres sources d'anémie</div>
-                        <div class="list-item">IDR : intradermo-réaction allergique (positive si infestation)</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Albendazole 400 mg/jour pendant 3 jours</div>
-                        <div class="list-item">Mébendazole 100 mg × 2/jour pendant 3 jours</div>
-                        <div class="list-item">Pyrantel 10 mg/kg en dose unique</div>
-                        <div class="list-item">Complémenter en fer et protéines pour corriger l'anémie</div>
-                    </div>
-                    
-                    <div class="note">
-                        <div class="note-title">💡 Points clés :</div>
-                        <div class="note-content">Parasite majeur dans les pays tropicaux. Pénétration cutanée characteristic. Hémorragies chroniques causent anémie ferriprive majeure. Facteur important de malnutrition. Prévention : porter des chaussures, améliorer hygiène.</div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <!-- TAENIA -->
-        <div id="taenia" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🪱 Taenia (Ténia - Cestode)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasites :</span>
-                            <span class="info-value">Taenia saginata (boeuf) | Taenia solium (porc)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Classification :</span>
-                            <span class="info-value">Plathelminthes, Cestodes (vers plats)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">4-10 mètres parfois jusqu'à 20 m</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Forme :</span>
-                            <span class="info-value">Bande blanche aplatie, segmentée</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, hétéroxène, obligatoire, permanent</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📐 STRUCTURE</div>
-                        <div class="list-item"><strong>Scolex :</strong> Tête avec ventouses et crochets (T. solium)</div>
-                        <div class="list-item"><strong>Cou :</strong> Zone germinative</div>
-                        <div class="list-item"><strong>Strobila :</strong> Corps segmenté (proglottis - anneaux)</div>
-                        <div class="list-item"><strong>Proglottis gravidescendants :</strong> Pleins d'œufs</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (Hétéroxène)</div>
-                        <div class="info-item">
-                            <span class="info-label">Hôte définitif :</span>
-                            <span class="info-value">Humain (intestin grêle)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Hôte intermédiaire :</span>
-                            <span class="info-value">Bovin (T. saginata) ou Porcin (T. solium)</span>
-                        </div>
-                        <div class="list-item">Émission de proglottis remplis d'œufs avec selles</div>
-                        <div class="list-item">Ingestion par animal (pâturage, aliments contaminés)</div>
-                        <div class="list-item">Éclosion dans intestin animal</div>
-                        <div class="list-item">Migration circulatoire vers muscles (cysticercose)</div>
-                        <div class="list-item">Formation de cysticerque (larve enkystée) dans muscle</div>
-                        <div class="list-item">Ingestion par humain de viande insuffisamment cuite</div>
-                        <div class="list-item">Excystion dans intestin humain</div>
-                        <div class="list-item">Fixation du scolex à muqueuse</div>
-                        <div class="list-item">Maturation du strobile (cycle 3-4 mois)</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Consommation de viande de boeuf insuffisamment cuite (T. saginata)</div>
-                        <div class="list-item">Consommation de viande de porc insuffisamment cuite (T. solium)</div>
-                        <div class="list-item">Contact avec selles d'humain infesté (cysticercose)</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ T. solium - Risque spécial :</div>
-                            <div class="warning-content">Peut causer NEUROCYSTICERCOSE par autoinfection ou aliments contaminés (mains sales). Parasites se localisent dans le cerveau, causing convulsions, épilepsie, céphalées.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES - TENIASE</div>
-                        <div class="info-item">
-                            <span class="info-label">Souvent ASYMPTOMATIQUE (découverte fortuite)</span>
-                        </div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Symptômes légers si présents :</span>
-                        </div>
-                        <div class="list-item">Douleurs abdominales vagues, crampes</div>
-                        <div class="list-item">Diarrhée, constipation alternante</div>
-                        <div class="list-item">Nausées, anorexie</div>
-                        <div class="list-item">Perte de poids modérée</div>
-                        <div class="list-item">Prurit anal (surtout la nuit)</div>
-                        <div class="list-item">Faiblesse, asthénie légère</div>
-                        <div class="list-item">Réactions allergiques (rares)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Neurocysticercose (T. solium) :</span>
-                        </div>
-                        <div class="list-item">Crises épileptiques (symptôme majeur)</div>
-                        <div class="list-item">Céphalées intenses</div>
-                        <div class="list-item">Troubles visuels</div>
-                        <div class="list-item">Hypertension intracrânienne</div>
-                        <div class="list-item">Peut être GRAVE</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Recherche d'œufs dans les selles</div>
-                        <div class="list-item">Œufs : 30-40 μm, ronds, coque épaisse</div>
-                        <div class="list-item">Techniques d'enrichissement (flottation)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Observation Macroscopique :</span>
-                        </div>
-                        <div class="list-item">Visualisation de proglottis (anneaux) à l'oeil nu</div>
-                        <div class="list-item">Émission de chaînes de segments dans selles</div>
-                        <div class="list-item">Proglottis gravide blanc/beige</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Biologie :</span>
-                        </div>
-                        <div class="list-item">NFS : Anémie légère possible</div>
-                        <div class="list-item">Hyperéosinophilie modérée</div>
-                        <div class="list-item">Sérologie : recherche d'anticorps (moins fiable)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Imagerie (si neurocysticercose) :</span>
-                        </div>
-                        <div class="list-item">IRM, TDM cérébrale</div>
-                        <div class="list-item">Ponction lombaire avec recherche d'œufs</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Niclosamide 2 g en dose unique (best choice)</div>
-                        <div class="list-item">Praziquantel 5-10 mg/kg en dose unique</div>
-                        <div class="list-item">Albendazole 15 mg/kg/jour pendant 3 jours</div>
-                        <div class="note">
-                            <div class="note-title">💡 Important :</div>
-                            <div class="note-content">Purgatif doux avant traitement pour éliminer proglottis. Examiner les selles pour confirmer éradication. Pour neurocysticercose : traitement spécialisé, souvent antiépileptiques nécessaires.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="warning">
-                        <div class="warning-title">⚠️ Prévention majeure :</div>
-                        <div class="warning-content">Cuire complètement la viande (65-70°C). Congélation -20°C pendant 7 jours. Hygiène fécale stricte. Inspection vétérinaire des viandes.</div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <!-- DOUVE -->
-        <div id="douve" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🪱 Douve (Trematode - Fasciola hepatica)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasite :</span>
-                            <span class="info-value">Fasciola hepatica (Douve hépatique)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Classification :</span>
-                            <span class="info-value">Plathelminthes, Trematodes (vers plats)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">20-50 mm (7-15 mm largeur)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Forme :</span>
-                            <span class="info-value">Feuille aplatie, brunâtre</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, hétéroxène, obligatoire</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📐 STRUCTURE</div>
-                        <div class="list-item"><strong>Ventouses :</strong> Orale et ventrale (adhésion)</div>
-                        <div class="list-item"><strong>Appareil digestif :</strong> Hermaphrodite</div>
-                        <div class="list-item"><strong>Appareil reproducteur :</strong> Complexe</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (Complexe - Hétéroxène)</div>
-                        <div class="info-item">
-                            <span class="info-label">Hôte définitif :</span>
-                            <span class="info-value">Humain (canaux biliaires)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Hôte intermédiaire :</span>
-                            <span class="info-value">Petite limnée d'eau douce (mollusque)</span>
-                        </div>
-                        <div class="list-item">Adulte dans canaux biliaires → Ponte d'œufs</div>
-                        <div class="list-item">Œufs éliminés avec selles</div>
-                        <div class="list-item">Développement dans eau (miracidium)</div>
-                        <div class="list-item">Ingestion par mollusque</div>
-                        <div class="list-item">Multiplication asexuée (sporocystes, rédies)</div>
-                        <div class="list-item">Libération de cercaires (larves flagellées)</div>
-                        <div class="list-item">Nage vers surface eau</div>
-                        <div class="list-item">Pénétration percutanée chez humain</div>
-                        <div class="list-item">Migration hépatique (nécrose du parenchyme)</div>
-                        <div class="list-item">Maturation dans canaux biliaires (8-13 semaines)</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Contact avec eau douce contaminée (baignade, ingestion)</div>
-                        <div class="list-item">Consommation de plantes aquatiques crues (cresson, laitue d'eau)</div>
-                        <div class="list-item">Pénétration percutanée de cercaires</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES</div>
-                        <div class="info-item">
-                            <span class="info-label">Phase Aigüe (invasion - 4 à 12 semaines) :</span>
-                        </div>
-                        <div class="list-item">Fièvre, frissons</div>
-                        <div class="list-item">Douleur épigastrique intense</div>
-                        <div class="list-item">Hépatomégalie (foie augmenté)</div>
-                        <div class="list-item">Réactions allergiques (urticaire, asthme)</div>
-                        <div class="list-item">Eosinophilie massive</div>
-                        <div class="list-item">Diarrhée, nausées, vomissements</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Phase Chronique (adulte dans canaux biliaires) :</span>
-                        </div>
-                        <div class="list-item">Lithiase biliaire (calculs)</div>
-                        <div class="list-item">Cholécystite chronique</div>
-                        <div class="list-item">Ictère (jaunisse) légère</div>
-                        <div class="list-item">Cholangite (infection des canaux)</div>
-                        <div class="list-item">Cirrhose biliaire secondaire</div>
-                        <div class="list-item">Douleurs épigastriques chroniques</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Complications :</div>
-                            <div class="warning-content">Fibrosis hépatique, cirrhose, insuffisance hépatique, augmentation du risque de cholangiocarcinome (cancer des canaux)</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Recherche d'œufs dans selles (phase chronique)</div>
-                        <div class="list-item">Œufs : 130-150 × 60-90 μm, grands, operculés</div>
-                        <div class="list-item">Techniques d'enrichissement</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Biologie :</span>
-                        </div>
-                        <div class="list-item">NFS : Hyperéosinophilie majeure (phase aigüe)</div>
-                        <div class="list-item">Tests hépatiques : transaminases augmentées</div>
-                        <div class="list-item">Sérologie : recherche d'anticorps (bonne sensibilité)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Imagerie :</span>
-                        </div>
-                        <div class="list-item">Échographie : hépatomégalie, canaux dilatés</div>
-                        <div class="list-item">IRM : masse hépatique (phase aigüe)</div>
-                        <div class="list-item">Coproscopie : œufs dans selles</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Triclabendazole (meilleur agent)</div>
-                        <div class="list-item">Praziquantel</div>
-                        <div class="list-item">Bithionol</div>
-                        <div class="note">
-                            <div class="note-title">💡 Points clés :</div>
-                            <div class="note-content">Fréquente en régions à élevage ovin. Transmission par cresson et plantes aquatiques. Parasites causent dommage hépatique majeur. Prévention : ne pas consommer plantes crues provenant zones contaminées.</div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <!-- GIARDIA -->
-        <div id="giardia" class="tab-content">
-            <div class="parasite-card">
-                <div class="card-header">🔬 Giardia intestinalis (Lamblia intestinalis)</div>
-                <div class="card-body">
-                    
-                    <div class="section">
-                        <div class="section-title">🦠 AGENT PATHOGÈNE</div>
-                        <div class="info-item">
-                            <span class="info-label">Parasite :</span>
-                            <span class="info-value">Protozoaire flagellé</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Classification :</span>
-                            <span class="info-value">Mastigophora (flagellés)</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Dimension :</span>
-                            <span class="info-value">Trophozoïte : 12-15 μm | Kyste : 8-12 μm</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Type :</span>
-                            <span class="info-value">Endoparasite, monoxène, obligatoire, permanent</span>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔄 FORMES PARASITAIRES</div>
-                        <div class="table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Forme</th>
-                                        <th>Localisation</th>
-                                        <th>Caractéristiques</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Trophozoïte</strong></td>
-                                        <td>Intestin grêle (duodénum)</td>
-                                        <td>12-15 μm, mobile, 4 flagelles antérieurs, 2 flagelles postérieurs, disque de fixation</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Kyste</strong></td>
-                                        <td>Côlon</td>
-                                        <td>8-12 μm, forme de résistance, 4 noyaux, éliminé dans selles</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔁 CYCLE DE VIE (Simple - 5-12 jours)</div>
-                        <div class="list-item">Ingestion de kystes contaminés</div>
-                        <div class="list-item">Excystion dans intestin grêle</div>
-                        <div class="list-item">Transformation en trophozoïtes</div>
-                        <div class="list-item">Fixation au disque adhésif sur muqueuse duodénale</div>
-                        <div class="list-item">Multiplication par division binaire</div>
-                        <div class="list-item">Migration vers côlon → Enkystement</div>
-                        <div class="list-item">Élimination de kystes avec selles (des milliards/jour)</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">📋 MODE DE TRANSMISSION</div>
-                        <div class="list-item">Fécale-orale (prédominant)</div>
-                        <div class="list-item">Aliments contaminés</div>
-                        <div class="list-item">Eau contaminée (très résistant à chloration)</div>
-                        <div class="list-item">Contact direct (mains sales)</div>
-                        <div class="list-item">Relation sexuelle anale-orale</div>
-                        <div class="note">
-                            <div class="note-title">💡 Particularité :</div>
-                            <div class="note-content">Épidémies d'eau associées. Très résistant aux conditions extérieures. Peut survivre à la congélation.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🏥 SIGNES CLINIQUES</div>
-                        <div class="info-item">
-                            <span class="info-label">Souvent ASYMPTOMATIQUE ou léger</span>
-                        </div>
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Giardiase Aigüe :</span>
-                        </div>
-                        <div class="list-item">Début soudain</div>
-                        <div class="list-item">Diarrhée liquide (non sanglante)</div>
-                        <div class="list-item">Crampes abdominales</div>
-                        <div class="list-item">Ballonnements, flatulences</div>
-                        <div class="list-item">Nausées, anorexie</div>
-                        <div class="list-item">Malabsorption (selles graisseuses, stéatorrhée)</div>
-                        <div class="list-item">Fièvre modérée (rare)</div>
-                        <div class="list-item">Duree : 1-4 semaines puis chronique</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Giardiase Chronique :</span>
-                        </div>
-                        <div class="list-item">Diarrhée intermittente</div>
-                        <div class="list-item">Malabsorption prolongée</div>
-                        <div class="list-item">Perte de poids</div>
-                        <div class="list-item">Carence en vitamines (B12, acide folique, lipides)</div>
-                        <div class="list-item">Retard de croissance (enfants)</div>
-                        <div class="list-item">Fatigue chronique</div>
-                        <div class="warning">
-                            <div class="warning-title">⚠️ Immunodéprimés :</div>
-                            <div class="warning-content">Infection sévère, récurrente, difficile à traiter chez patients VIH/SIDA.</div>
-                        </div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">🔍 DIAGNOSTIC</div>
-                        <div class="info-item">
-                            <span class="info-label">Examen Coprologique :</span>
-                        </div>
-                        <div class="list-item">Recherche de trophozoïtes ET kystes</div>
-                        <div class="list-item">Examen à l'état frais sur plaque chauffante (trophozoïtes)</div>
-                        <div class="list-item">Techniques d'enrichissement (flottation)</div>
-                        <div class="list-item">Coloration MIF : identification des kystes</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Examen Direct :</span>
-                        </div>
-                        <div class="list-item">Trophozoïte : 12-15 μm, mobile (mouvement caractéristique type "feuille")</div>
-                        <div class="list-item">4 flagelles antérieurs, 2 postérieurs</div>
-                        <div class="list-item">Disque ventral d'adhésion</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Culture :</span>
-                        </div>
-                        <div class="list-item">Possible sur milieux spécialisés (rarement pratiquée)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Sérologie :</span>
-                        </div>
-                        <div class="list-item">Recherche d'anticorps (moins spécifique)</div>
-                        
-                        <div class="info-item" style="margin-top: 10px;">
-                            <span class="info-label">Autres :</span>
-                        </div>
-                        <div class="list-item">Test ELISA fécal (antigène giardia)</div>
-                        <div class="list-item">Biopsie duodénale si diagnostic difficile</div>
-                    </div>
-                    
-                    <div class="section">
-                        <div class="section-title">💊 TRAITEMENT</div>
-                        <div class="list-item">Métronidazole (Flagyl) 250 mg × 3/jour pendant 7 jours</div>
-                        <div class="list-item">Tinidazole 2 g en dose unique (meilleur)</div>
-                        <div class="list-item">Albendazole 400 mg/jour pendant 5 jours</div>
-                        <div class="list-item">Paromomycine 25-35 mg/kg/jour pendant 7 jours</div>
-                        <div class="note">
-                            <div class="note-title">💡 Important :</div>
-                            <div class="note-content">Traiter partenaires sexuels. Hygiène stricte (lavage mains). Contamination croisée fréquente. Peut nécessiter traitement répété. Moins sévère que Entamoeba mais très contagieux.</div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        
     </div>
-    
+
     <script>
-        function showTab(tabName) {
-            // Masquer tous les contenus
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.remove('active');
+        // Ajout d'un peu d'interactivité pour améliorer l'expérience utilisateur
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation d'apparition progressive des sections
+            const sections = document.querySelectorAll('.parasite-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    section.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 100);
             });
-            
-            // Retirer la classe active de tous les boutons
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(button => {
-                button.classList.remove('active');
+
+            // Mise en évidence des termes importants au survol
+            const importantTerms = document.querySelectorAll('.important, .danger, .success');
+            importantTerms.forEach(term => {
+                term.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                
+                term.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
             });
-            
-            // Afficher le contenu sélectionné
-            document.getElementById(tabName).classList.add('active');
-            
-            // Activer le bouton cliqué
-            event.target.classList.add('active');
-        }
+        });
     </script>
-    
 </body>
 </html>
