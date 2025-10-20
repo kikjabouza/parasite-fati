@@ -16,6 +16,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         .container {
@@ -50,42 +51,87 @@
         }
         
         .parasite-section {
-            margin-bottom: 40px;
+            margin-bottom: 15px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            background: white;
         }
         
-        .parasite-section:hover {
-            transform: translateY(-5px);
+        .parasite-section.active {
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: #3498db;
         }
         
         .parasite-header {
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
             color: white;
             padding: 20px;
-            font-size: 1.8em;
+            font-size: 1.5em;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        
+        .parasite-header:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #2471a3 100%);
         }
         
         .protozoaire .parasite-header {
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
         }
         
+        .protozoaire .parasite-header:hover {
+            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        }
+        
         .helminthe .parasite-header {
             background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
         }
         
+        .helminthe .parasite-header:hover {
+            background: linear-gradient(135deg, #229954 0%, #1e8449 100%);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+        
         .icon {
             font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .parasite-section.active .icon {
+            transform: rotate(90deg);
+        }
+        
+        .chevron {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .parasite-section.active .chevron {
+            transform: rotate(90deg);
         }
         
         .parasite-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+        
+        .parasite-section.active .parasite-content {
+            max-height: 5000px;
             padding: 0;
         }
         
@@ -182,6 +228,43 @@
             color: #2e7d32;
         }
 
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .control-btn.proto {
+            background: #e74c3c;
+        }
+
+        .control-btn.helm {
+            background: #27ae60;
+        }
+
+        .control-btn.all {
+            background: #2c3e50;
+        }
+
         @media print {
             body {
                 background: white;
@@ -193,6 +276,54 @@
             .parasite-section {
                 page-break-inside: avoid;
             }
+            .parasite-content {
+                max-height: none !important;
+                display: block !important;
+            }
+            .controls {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .parasite-header {
+                font-size: 1.2em;
+                padding: 15px;
+            }
+            
+            th, td {
+                padding: 10px;
+                display: block;
+                width: 100%;
+            }
+            
+            th {
+                border-bottom: none;
+                background: #2c3e50;
+            }
+            
+            tr {
+                display: block;
+                margin-bottom: 10px;
+                border: 1px solid #ecf0f1;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 200px;
+            }
         }
     </style>
 </head>
@@ -200,17 +331,26 @@
     <div class="container">
         <div class="header">
             <h1>🦠 TABLEAU RÉCAPITULATIF - PARASITOLOGIE</h1>
-            <p>Guide complet pour la préparation à l'examen</p>
+            <p>Guide complet pour la préparation à l'examen - Cliquez sur les titres pour déplier/replier</p>
         </div>
         
         <div class="content">
+            <div class="controls">
+                <button class="control-btn all" onclick="toggleAll('open')">📖 Tout Ouvrir</button>
+                <button class="control-btn all" onclick="toggleAll('close')">📕 Tout Fermer</button>
+                <button class="control-btn proto" onclick="toggleCategory('protozoaire')">🔴 Protozoaires</button>
+                <button class="control-btn helm" onclick="toggleCategory('helminthe')">🟢 Helminthes</button>
+            </div>
             
             <!-- AMIBIASE -->
             <div class="parasite-section protozoaire">
                 <div class="parasite-header">
-                    <span class="icon">🔴</span>
-                    AMIBIASE (Dysenterie amibienne)
-                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    <div class="header-content">
+                        <span class="icon">🔴</span>
+                        AMIBIASE (Dysenterie amibienne)
+                        <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -324,9 +464,12 @@
             <!-- GIARDIOSE -->
             <div class="parasite-section protozoaire">
                 <div class="parasite-header">
-                    <span class="icon">🔴</span>
-                    GIARDIOSE (Giardiase)
-                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    <div class="header-content">
+                        <span class="icon">🔴</span>
+                        GIARDIOSE (Giardiase)
+                        <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -451,9 +594,12 @@
             <!-- PALUDISME -->
             <div class="parasite-section protozoaire">
                 <div class="parasite-header">
-                    <span class="icon">🔴</span>
-                    PALUDISME (Malaria)
-                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    <div class="header-content">
+                        <span class="icon">🔴</span>
+                        PALUDISME (Malaria)
+                        <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -629,9 +775,12 @@
             <!-- TOXOPLASMOSE -->
             <div class="parasite-section protozoaire">
                 <div class="parasite-header">
-                    <span class="icon">🔴</span>
-                    TOXOPLASMOSE
-                    <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    <div class="header-content">
+                        <span class="icon">🔴</span>
+                        TOXOPLASMOSE
+                        <span class="category-badge proto-badge">PROTOZOAIRE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -791,9 +940,12 @@
             <!-- BILHARZIOSE -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    BILHARZIOSE (Schistosomiase)
-                    <span class="category-badge helm-badge">HELMINTHE - TRÉMATODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        BILHARZIOSE (Schistosomiase)
+                        <span class="category-badge helm-badge">HELMINTHE - TRÉMATODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -978,9 +1130,12 @@
             <!-- ASCARIDIOSE -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    ASCARIDIOSE (Ascaris)
-                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        ASCARIDIOSE (Ascaris)
+                        <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -1143,9 +1298,12 @@
             <!-- OXYUROSE -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    OXYUROSE
-                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        OXYUROSE
+                        <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -1308,9 +1466,12 @@
             <!-- TRICHOCÉPHALOSE -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    TRICHOCÉPHALOSE (Trichuriase)
-                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        TRICHOCÉPHALOSE (Trichuriase)
+                        <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -1468,9 +1629,12 @@
             <!-- ANKYLOSTOMOSE -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    ANKYLOSTOMOSE (Ankylostome)
-                    <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        ANKYLOSTOMOSE (Ankylostome)
+                        <span class="category-badge helm-badge">HELMINTHE - NÉMATODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -1634,9 +1798,12 @@
             <!-- TAENIA -->
             <div class="parasite-section helminthe">
                 <div class="parasite-header">
-                    <span class="icon">🟢</span>
-                    TAENIA (Téniasis et Cysticercose)
-                    <span class="category-badge helm-badge">HELMINTHE - CESTODE</span>
+                    <div class="header-content">
+                        <span class="icon">🟢</span>
+                        TAENIA (Téniasis et Cysticercose)
+                        <span class="category-badge helm-badge">HELMINTHE - CESTODE</span>
+                    </div>
+                    <span class="chevron">▶</span>
                 </div>
                 <div class="parasite-content">
                     <table>
@@ -1821,8 +1988,25 @@
     </div>
 
     <script>
-        // Ajout d'un peu d'interactivité pour améliorer l'expérience utilisateur
+        // Fonction pour ouvrir/fermer les sections
         document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.parasite-header');
+            
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const section = this.parentElement;
+                    section.classList.toggle('active');
+                    
+                    // Animation d'apparition du contenu
+                    const content = section.querySelector('.parasite-content');
+                    if (section.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                });
+            });
+
             // Animation d'apparition progressive des sections
             const sections = document.querySelectorAll('.parasite-section');
             sections.forEach((section, index) => {
@@ -1849,6 +2033,36 @@
                 });
             });
         });
+
+        // Fonctions pour les boutons de contrôle
+        function toggleAll(action) {
+            const sections = document.querySelectorAll('.parasite-section');
+            sections.forEach(section => {
+                const content = section.querySelector('.parasite-content');
+                if (action === 'open') {
+                    section.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    section.classList.remove('active');
+                    content.style.maxHeight = '0';
+                }
+            });
+        }
+
+        function toggleCategory(category) {
+            const sections = document.querySelectorAll('.parasite-section');
+            sections.forEach(section => {
+                if (section.classList.contains(category)) {
+                    section.classList.toggle('active');
+                    const content = section.querySelector('.parasite-content');
+                    if (section.classList.contains('active')) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0';
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
